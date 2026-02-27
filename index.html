@@ -23,40 +23,62 @@
   </head>
   <body>
     <div id="root"></div>
-    26   <script>
-27     document.addEventListener("click", function (e) {
-28       const a = e.target.closest("a");
-29       if (a) {
-30         const href = (a.getAttribute("href") || "").trim();
-31         const clean = href.split("?")[0].split("#")[0];
+ <script>
+  (function () {
+    function goToContact() {
+      window.location.href = "/contact.html";
+    }
 
-32         if (
-33           clean === "/contact" ||
-34           clean === "contact" ||
-35           clean === "/quote" ||
-36           clean === "/get-quote" ||
-37           clean === "/get-a-quote" ||
-38           clean === "/request-quote"
-39         ) {
-40           e.preventDefault();
-41           window.location.href = "/contact.html";
-42           return;
-43         }
-44       }
+    // If someone lands on the Base44 route directly, bounce them to the real contact page
+    const path = (window.location.pathname || "").toLowerCase();
+    const contactPaths = ["/contact", "/quote", "/get-quote", "/get-a-quote", "/request-quote"];
+    if (contactPaths.includes(path)) {
+      goToContact();
+      return;
+    }
 
-45       const btn = e.target.closest("button");
-46       if (btn) {
-47         const text = (btn.textContent || "").toLowerCase();
-48         if (
-49           text.includes("get a quote") ||
-50           text.includes("free quote") ||
-51           text.includes("request a quote")
-52         ) {
-53           e.preventDefault();
-54           window.location.href = "/contact.html";
-55         }
-56       }
-57     });
-58   </script>
+    // Intercept clicks on links/buttons anywhere on the page
+    document.addEventListener(
+      "click",
+      function (e) {
+        // Catch <a href="/Contact">, <a href="/contact">, etc.
+        const a = e.target.closest("a");
+        if (a) {
+          const href = (a.getAttribute("href") || "").trim();
+          const clean = href.split("?")[0].split("#")[0].toLowerCase();
+
+          if (
+            clean === "/contact" ||
+            clean === "contact" ||
+            clean === "/quote" ||
+            clean === "/get-quote" ||
+            clean === "/get-a-quote" ||
+            clean === "/request-quote"
+          ) {
+            e.preventDefault();
+            goToContact();
+            return;
+          }
+        }
+
+        // Catch buttons (and "button-like" elements)
+        const btn = e.target.closest("button,[role='button']");
+        if (btn) {
+          const text = (btn.textContent || "").toLowerCase();
+          if (
+            text.includes("get a quote") ||
+            text.includes("free quote") ||
+            text.includes("request a quote")
+          ) {
+            e.preventDefault();
+            goToContact();
+            return;
+          }
+        }
+      },
+      true
+    );
+  })();
+</script>
   </body>
 </html>
