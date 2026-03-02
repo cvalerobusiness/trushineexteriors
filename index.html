@@ -21,6 +21,18 @@
     <script type="module" crossorigin src="/assets/index-B3Aa9wQb.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-URt45oYU.css">
   </head>
+  <script>
+  (function () {
+    var p = new URLSearchParams(window.location.search);
+    var r = p.get("redirect");
+    if (r) {
+      p.delete("redirect");
+      var newUrl = decodeURIComponent(r);
+      // Clean the URL bar without reloading
+      window.history.replaceState(null, "", newUrl);
+    }
+  })();
+</script>
   <body>
     <div id="root"></div>
  <script>
