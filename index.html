@@ -21,111 +21,70 @@
     <script type="module" crossorigin src="/assets/index-B3Aa9wQb.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-URt45oYU.css">
   </head>
-  <script>
-  (function () {
-    var p = new URLSearchParams(window.location.search);
-    var r = p.get("redirect");
-    if (r) {
-      p.delete("redirect");
-      var newUrl = decodeURIComponent(r);
-      // Clean the URL bar without reloading
-      window.history.replaceState(null, "", newUrl);
-    }
-  })();
-</script>
-  <script>
-document.addEventListener("click", function (e) {
-
-  // If they click ANY button
-  const btn = e.target.closest("button");
-  if (btn) {
-    const text = (btn.textContent || "").toLowerCase();
-
-    if (
-      text.includes("get a quote") ||
-      text.includes("request a quote") ||
-      text.includes("free quote")
-    ) {
-      e.preventDefault();
-      window.location.href = "/quote.html";
-      return;
-    }
-  }
-
-  // If they click any link
-  const link = e.target.closest("a");
-  if (link) {
-    const href = (link.getAttribute("href") || "").toLowerCase();
-
-    if (
-      href.includes("quote") ||
-      href.includes("contact")
-    ) {
-      e.preventDefault();
-      window.location.href = "/quote.html";
-    }
-  }
-
-});
-</script>
   <body>
     <div id="root"></div>
- <script>
-  (function () {
-    function goToContact() {
-      window.location.href = "/contact.html";
+<script>
+(function () {
+  // 1) If someone types a "pretty" URL, redirect to the real HTML file
+  const path = (window.location.pathname || "").toLowerCase();
+
+  const quotePaths = ["/quote", "/get-quote", "/get-a-quote", "/request-quote"];
+  const contactPaths = ["/contact"];
+
+  if (quotePaths.includes(path)) {
+    window.location.replace("/quote.html");
+    return;
+  }
+  if (contactPaths.includes(path)) {
+    window.location.replace("/contact.html");
+    return;
+  }
+
+  // 2) Intercept clicks on the site and route correctly
+  document.addEventListener("click", function (e) {
+    // If they clicked a link
+    const a = e.target.closest("a");
+    if (a) {
+      const hrefRaw = (a.getAttribute("href") || "").trim();
+      const href = hrefRaw.split("?")[0].split("#")[0].toLowerCase();
+
+      // send "quote" things to quote.html
+      if (
+        href === "/quote" ||
+        href === "quote" ||
+        href === "/get-quote" ||
+        href === "/get-a-quote" ||
+        href === "/request-quote" ||
+        href === "/quote.html"
+      ) {
+        e.preventDefault();
+        window.location.href = "/quote.html";
+        return;
+      }
+
+      // send "contact" things to contact.html
+      if (href === "/contact" || href === "contact" || href === "/contact.html") {
+        e.preventDefault();
+        window.location.href = "/contact.html";
+        return;
+      }
+
+      return; // let other links work normally
     }
 
-    // If someone lands on the Base44 route directly, bounce them to the real contact page
-    const path = (window.location.pathname || "").toLowerCase();
-    const contactPaths = ["/contact", "/quote", "/get-quote", "/get-a-quote", "/request-quote"];
-    if (contactPaths.includes(path)) {
-      goToContact();
-      return;
+    // If they clicked a button (Get a Quote / Request a Quote)
+    const btn = e.target.closest("button,[role='button']");
+    if (btn) {
+      const text = (btn.textContent || "").toLowerCase();
+
+      if (text.includes("get a quote") || text.includes("request a quote") || text.includes("free quote")) {
+        e.preventDefault();
+        window.location.href = "/quote.html";
+        return;
+      }
     }
-
-    // Intercept clicks on links/buttons anywhere on the page
-    document.addEventListener(
-      "click",
-      function (e) {
-        // Catch <a href="/Contact">, <a href="/contact">, etc.
-        const a = e.target.closest("a");
-        if (a) {
-          const href = (a.getAttribute("href") || "").trim();
-          const clean = href.split("?")[0].split("#")[0].toLowerCase();
-
-          if (
-            clean === "/contact" ||
-            clean === "contact" ||
-            clean === "/quote" ||
-            clean === "/get-quote" ||
-            clean === "/get-a-quote" ||
-            clean === "/request-quote"
-          ) {
-            e.preventDefault();
-            goToContact();
-            return;
-          }
-        }
-
-        // Catch buttons (and "button-like" elements)
-        const btn = e.target.closest("button,[role='button']");
-        if (btn) {
-          const text = (btn.textContent || "").toLowerCase();
-          if (
-            text.includes("get a quote") ||
-            text.includes("free quote") ||
-            text.includes("request a quote")
-          ) {
-            e.preventDefault();
-            goToContact();
-            return;
-          }
-        }
-      },
-      true
-    );
-  })();
+  }, true);
+})();
 </script>
   </body>
 </html>
