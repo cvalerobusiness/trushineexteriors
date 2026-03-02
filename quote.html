@@ -13,12 +13,16 @@
   <meta property="og:image" content="https://trushineexteriors.com/og-image.png" />
   <meta property="og:url" content="https://trushineexteriors.com/quote.html" />
   <meta property="og:type" content="website" />
+
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Request a Free Quote | TruShine" />
+  <meta name="twitter:description" content="Crystal clear windows and professional exterior care in San Antonio, TX." />
   <meta name="twitter:image" content="https://trushineexteriors.com/og-image.png" />
 
   <link rel="icon" type="image/png" href="/favicon.png" />
+
   <!-- Uses your existing site CSS -->
-  <link rel="stylesheet" crossorigin href="/assets/index-URt45oYU.css">
+  <link rel="stylesheet" crossorigin href="/assets/index-URt45oYU.css" />
 
   <style>
     /* Page-specific polish (Base44-style card + spacing) */
@@ -111,12 +115,17 @@
       align-items:center;
       justify-content:center;
       gap:10px;
+      transition: transform .08s ease, opacity .2s ease;
     }
+    .btn-primary:active{ transform: translateY(1px); }
     .btn-primary[disabled]{ opacity:.65; cursor:not-allowed; }
+
     .small-note{
       font-size: 13px;
       color: rgba(15, 23, 42, .70);
     }
+
+    /* Success / error boxes */
     .success, .error{
       margin-top: 12px;
       padding: 12px 12px;
@@ -126,6 +135,15 @@
     }
     .success{ background: rgba(16,185,129,.12); color: #065f46; }
     .error{ background: rgba(239,68,68,.10); color: #7f1d1d; }
+
+    /* animation */
+    .pop-in{
+      animation: popIn .22s ease-out both;
+    }
+    @keyframes popIn{
+      from { opacity: 0; transform: translateY(6px) scale(.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
   </style>
 </head>
 
@@ -138,11 +156,10 @@
       </div>
 
       <div class="quote-body">
+        <!-- IMPORTANT: action stays Formspree, but we intercept submit via JS -->
         <form id="quoteForm" action="https://formspree.io/f/xbdabkyg" method="POST">
-          <!-- Optional: email subject line -->
+          <!-- Email subject line -->
           <input type="hidden" name="_subject" value="New TruShine Quote Request" />
-          <!-- Optional: redirect after submit (you can remove this if you want the inline success message only) -->
-          <input type="hidden" name="_redirect" value="https://trushineexteriors.com/quote.html?sent=1" />
 
           <div class="grid">
             <div>
@@ -188,8 +205,10 @@
             <button class="btn-primary" id="submitBtn" type="submit">
               Submit Quote Request
             </button>
+
             <div class="small-note">
-              Or email us directly at <a href="mailto:info@trushineexteriors.com">info@trushineexteriors.com</a>
+              Or email us directly at
+              <a href="mailto:info@trushineexteriors.com">info@trushineexteriors.com</a>
             </div>
           </div>
 
@@ -201,18 +220,59 @@
   </div>
 
   <script>
-    // If redirected back with ?sent=1
-    if (new URLSearchParams(window.location.search).get("sent") === "1") {
-      const s = document.getElementById("successBox");
-      if (s) s.style.display = "block";
-    }
-
-    // Nice UX: button shows "Sending..." without breaking Formspree
     const form = document.getElementById("quoteForm");
     const btn = document.getElementById("submitBtn");
-    form.addEventListener("submit", () => {
+    const successBox = document.getElementById("successBox");
+    const errorBox = document.getElementById("errorBox");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      // reset UI
+      successBox.style.display = "none";
+      errorBox.style.display = "none";
+      successBox.classList.remove("pop-in");
+      errorBox.classList.remove("pop-in");
+
+      // button state
       btn.disabled = true;
+      const originalHTML = btn.innerHTML;
       btn.textContent = "Sending…";
+
+      try {
+        const formData = new FormData(form);
+
+        const res = await fetch(form.action, {
+          method: "POST",
+          body: formData,
+          headers: { "Accept": "application/json" }
+        });
+
+        if (res.ok) {
+          form.reset();
+
+          // success message + animation
+          successBox.style.display = "block";
+          successBox.classList.add("pop-in");
+
+          // button becomes a checkmark / sent
+          btn.innerHTML = "Sent ✅";
+          setTimeout(() => {
+            btn.disabled = false;
+            btn.innerHTML = originalHTML;
+          }, 2500);
+        } else {
+          errorBox.style.display = "block";
+          errorBox.classList.add("pop-in");
+          btn.disabled = false;
+          btn.innerHTML = originalHTML;
+        }
+      } catch (err) {
+        errorBox.style.display = "block";
+        errorBox.classList.add("pop-in");
+        btn.disabled = false;
+        btn.innerHTML = originalHTML;
+      }
     });
   </script>
 </body>
