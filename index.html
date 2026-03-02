@@ -33,6 +33,41 @@
     }
   })();
 </script>
+  <script>
+document.addEventListener("click", function (e) {
+
+  // If they click ANY button
+  const btn = e.target.closest("button");
+  if (btn) {
+    const text = (btn.textContent || "").toLowerCase();
+
+    if (
+      text.includes("get a quote") ||
+      text.includes("request a quote") ||
+      text.includes("free quote")
+    ) {
+      e.preventDefault();
+      window.location.href = "/quote.html";
+      return;
+    }
+  }
+
+  // If they click any link
+  const link = e.target.closest("a");
+  if (link) {
+    const href = (link.getAttribute("href") || "").toLowerCase();
+
+    if (
+      href.includes("quote") ||
+      href.includes("contact")
+    ) {
+      e.preventDefault();
+      window.location.href = "/quote.html";
+    }
+  }
+
+});
+</script>
   <body>
     <div id="root"></div>
  <script>
