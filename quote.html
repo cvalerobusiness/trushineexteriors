@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Request a Free Quote | TruShine Exterior Care</title>
+  <meta name="description" content="Request a free quote for TruShine Exterior Care in San Antonio, TX." />
+
+  <!-- iMessage / social preview -->
+  <meta property="og:site_name" content="TruShine Exterior Care" />
+  <meta property="og:title" content="Request a Free Quote | TruShine" />
+  <meta property="og:description" content="Crystal clear windows and professional exterior care in San Antonio, TX." />
+  <meta property="og:image" content="https://trushineexteriors.com/og-image.png" />
+  <meta property="og:url" content="https://trushineexteriors.com/quote.html" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://trushineexteriors.com/og-image.png" />
+
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <!-- Uses your existing site CSS -->
+  <link rel="stylesheet" crossorigin href="/assets/index-URt45oYU.css">
+
+  <style>
+    /* Page-specific polish (Base44-style card + spacing) */
+    .quote-wrap{
+      min-height: calc(100vh - 80px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 48px 16px 64px;
+      background: #f6f8fb;
+    }
+    .quote-card{
+      width: 100%;
+      max-width: 860px;
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, .10);
+      overflow:hidden;
+      border: 1px solid rgba(15, 23, 42, .06);
+    }
+    .quote-hero{
+      padding: 34px 28px;
+      background: radial-gradient(1200px 400px at 20% 0%, rgba(59,130,246,.25), transparent 60%),
+                  linear-gradient(180deg, #0b1a33, #0a1630);
+      color:#fff;
+    }
+    .quote-hero h1{
+      margin:0 0 8px;
+      font-size: clamp(28px, 3.2vw, 42px);
+      letter-spacing:-.02em;
+    }
+    .quote-hero p{
+      margin:0;
+      opacity:.9;
+      max-width: 58ch;
+    }
+    .quote-body{
+      padding: 26px 28px 30px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 720px){
+      .grid{ grid-template-columns: 1fr; }
+      .quote-hero, .quote-body{ padding-left:18px; padding-right:18px; }
+    }
+    label{
+      display:block;
+      font-size: 13px;
+      font-weight: 700;
+      color:#0b1a33;
+      margin: 8px 0 6px;
+    }
+    input, select, textarea{
+      width:100%;
+      border: 1px solid rgba(15, 23, 42, .14);
+      border-radius: 12px;
+      padding: 12px 12px;
+      font-size: 15px;
+      outline:none;
+      background:#fff;
+    }
+    input:focus, select:focus, textarea:focus{
+      border-color: rgba(59,130,246,.65);
+      box-shadow: 0 0 0 4px rgba(59,130,246,.15);
+    }
+    textarea{ min-height: 140px; resize: vertical; }
+    .actions{
+      margin-top: 14px;
+      display:flex;
+      gap: 12px;
+      align-items:center;
+      justify-content:flex-start;
+      flex-wrap:wrap;
+    }
+    .btn-primary{
+      appearance:none;
+      border:0;
+      background: linear-gradient(180deg, #2b7de9, #1b63c0);
+      color:#fff;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 15px;
+      cursor:pointer;
+      min-width: 220px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+    }
+    .btn-primary[disabled]{ opacity:.65; cursor:not-allowed; }
+    .small-note{
+      font-size: 13px;
+      color: rgba(15, 23, 42, .70);
+    }
+    .success, .error{
+      margin-top: 12px;
+      padding: 12px 12px;
+      border-radius: 12px;
+      font-weight: 700;
+      display:none;
+    }
+    .success{ background: rgba(16,185,129,.12); color: #065f46; }
+    .error{ background: rgba(239,68,68,.10); color: #7f1d1d; }
+  </style>
+</head>
+
+<body>
+  <div class="quote-wrap">
+    <div class="quote-card">
+      <div class="quote-hero">
+        <h1>Request a Free Quote</h1>
+        <p>Tell us a little about your home and what you need cleaned. We’ll respond promptly.</p>
+      </div>
+
+      <div class="quote-body">
+        <form id="quoteForm" action="https://formspree.io/f/xbdabkyg" method="POST">
+          <!-- Optional: email subject line -->
+          <input type="hidden" name="_subject" value="New TruShine Quote Request" />
+          <!-- Optional: redirect after submit (you can remove this if you want the inline success message only) -->
+          <input type="hidden" name="_redirect" value="https://trushineexteriors.com/quote.html?sent=1" />
+
+          <div class="grid">
+            <div>
+              <label for="name">Full Name</label>
+              <input id="name" name="Full Name" type="text" autocomplete="name" required placeholder="Full Name" />
+            </div>
+
+            <div>
+              <label for="email">Email Address</label>
+              <input id="email" name="Email" type="email" autocomplete="email" required placeholder="Email Address" />
+            </div>
+
+            <div>
+              <label for="phone">Phone Number</label>
+              <input id="phone" name="Phone" type="tel" autocomplete="tel" required placeholder="Phone Number" />
+            </div>
+
+            <div>
+              <label for="service">Service Needed</label>
+              <select id="service" name="Service" required>
+                <option value="" selected disabled>Select a service</option>
+                <option>Window Cleaning</option>
+                <option>Interior + Exterior Windows</option>
+                <option>Exterior Windows</option>
+                <option>Screen Cleaning</option>
+                <option>Track/Frame Detail</option>
+                <option>Other (describe below)</option>
+              </select>
+            </div>
+
+            <div style="grid-column: 1 / -1;">
+              <label for="address">Property Address (optional)</label>
+              <input id="address" name="Address" type="text" autocomplete="street-address" placeholder="Property Address (optional)" />
+            </div>
+
+            <div style="grid-column: 1 / -1;">
+              <label for="message">Tell us about your home and what services you need</label>
+              <textarea id="message" name="Message" required placeholder="Tell us about your home and what services you need..."></textarea>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn-primary" id="submitBtn" type="submit">
+              Submit Quote Request
+            </button>
+            <div class="small-note">
+              Or email us directly at <a href="mailto:info@trushineexteriors.com">info@trushineexteriors.com</a>
+            </div>
+          </div>
+
+          <div class="success" id="successBox">✅ Sent! We’ll get back to you shortly.</div>
+          <div class="error" id="errorBox">❌ Something went wrong. Please try again or email us directly.</div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // If redirected back with ?sent=1
+    if (new URLSearchParams(window.location.search).get("sent") === "1") {
+      const s = document.getElementById("successBox");
+      if (s) s.style.display = "block";
+    }
+
+    // Nice UX: button shows "Sending..." without breaking Formspree
+    const form = document.getElementById("quoteForm");
+    const btn = document.getElementById("submitBtn");
+    form.addEventListener("submit", () => {
+      btn.disabled = true;
+      btn.textContent = "Sending…";
+    });
+  </script>
+</body>
+</html>
