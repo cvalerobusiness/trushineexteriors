@@ -28,62 +28,62 @@
   // 1) If someone types a "pretty" URL, redirect to the real HTML file
   const path = (window.location.pathname || "").toLowerCase();
 
-  const quotePaths = ["/quote", "/get-quote", "/get-a-quote", "/request-quote"];
-  const contactPaths = ["/contact"];
+  // Anything quote/contact-ish should go to quote.html
+  const quotePaths = [
+    "/quote",
+    "/get-quote",
+    "/get-a-quote",
+    "/request-quote",
+    "/contact"
+  ];
 
   if (quotePaths.includes(path)) {
     window.location.replace("/quote.html");
     return;
   }
-  if (contactPaths.includes(path)) {
-    window.location.replace("/contact.html");
-    return;
-  }
 
   // 2) Intercept clicks on the site and route correctly
-  document.addEventListener("click", function (e) {
-    // If they clicked a link
-    const a = e.target.closest("a");
-    if (a) {
-      const hrefRaw = (a.getAttribute("href") || "").trim();
-      const href = hrefRaw.split("?")[0].split("#")[0].toLowerCase();
+  document.addEventListener(
+    "click",
+    function (e) {
 
-      // send "quote" things to quote.html
-      if (
-        href === "/quote" ||
-        href === "quote" ||
-        href === "/get-quote" ||
-        href === "/get-a-quote" ||
-        href === "/request-quote" ||
-        href === "/quote.html"
-      ) {
-        e.preventDefault();
-        window.location.href = "/quote.html";
-        return;
+      // If they clicked a link
+      const a = e.target.closest("a");
+      if (a) {
+        const hrefRaw = (a.getAttribute("href") || "").trim();
+        const clean = hrefRaw.split("?")[0].split("#")[0].toLowerCase();
+
+        // Send BOTH contact + quote links to quote.html
+        if (
+          clean === "/contact" || clean === "contact" || clean === "/contact.html" ||
+          clean === "/quote" || clean === "quote" || clean === "/quote.html" ||
+          clean === "/get-quote" || clean === "/get-a-quote" || clean === "/request-quote"
+        ) {
+          e.preventDefault();
+          window.location.href = "/quote.html";
+          return;
+        }
       }
 
-      // send "contact" things to contact.html
-      if (href === "/contact" || href === "contact" || href === "/contact.html") {
-        e.preventDefault();
-        window.location.href = "/contact.html";
-        return;
+      // If they clicked a button (Get a Quote / Contact / Request Quote)
+      const btn = e.target.closest("button,[role='button']");
+      if (btn) {
+        const text = (btn.textContent || "").toLowerCase();
+
+        if (
+          text.includes("get a quote") ||
+          text.includes("request a quote") ||
+          text.includes("free quote") ||
+          text.includes("contact")
+        ) {
+          e.preventDefault();
+          window.location.href = "/quote.html";
+          return;
+        }
       }
-
-      return; // let other links work normally
-    }
-
-    // If they clicked a button (Get a Quote / Request a Quote)
-    const btn = e.target.closest("button,[role='button']");
-    if (btn) {
-      const text = (btn.textContent || "").toLowerCase();
-
-      if (text.includes("get a quote") || text.includes("request a quote") || text.includes("free quote")) {
-        e.preventDefault();
-        window.location.href = "/quote.html";
-        return;
-      }
-    }
-  }, true);
+    },
+    true
+  );
 })();
 </script>
   </body>
