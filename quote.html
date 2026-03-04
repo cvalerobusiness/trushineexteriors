@@ -240,6 +240,20 @@
       from { opacity:0; transform: translateY(8px) scale(.98); }
       to   { opacity:1; transform: translateY(0)   scale(1); }
     }
+    /* FORCE hero on top, form underneath (override anything external) */
+.quote-card{
+  display:flex !important;
+  flex-direction:column !important;
+}
+
+.quote-hero,
+.quote-body{
+  width:100% !important;
+}
+
+.quote-wrap{
+  align-items:flex-start !important;
+}
   </style>
 </head>
 
