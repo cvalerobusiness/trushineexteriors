@@ -157,6 +157,30 @@
       from { opacity:0; transform: translateY(8px) scale(.98); }
       to   { opacity:1; transform: translateY(0)   scale(1); }
     }
+    .trust-points{
+  margin-top:10px;
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  font-size:13px;
+  font-weight:600;
+  color:#0b1a33;
+}
+
+.trust-points span{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.trust-points span::before{
+  content:"";
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#2b7de9;
+  box-shadow:0 0 0 2px rgba(43,125,233,.18);
+}
   </style>
 </head>
 
@@ -220,6 +244,11 @@
 
           <div class="actions">
             <button class="btn-primary" id="submitBtn" type="submit">Submit Quote Request</button>
+            <div class="trust-points">
+  <span>Free Estimates</span>
+  <span>Fast Response</span>
+  <span>Professional & Insured</span>
+</div>
             <div class="small-note">
               Or email us directly at <a href="mailto:info@trushineexteriors.com">info@trushineexteriors.com</a>
             </div>
