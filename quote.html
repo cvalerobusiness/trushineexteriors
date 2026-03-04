@@ -3,10 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>Request a Free Quote | TruShine Exterior Care</title>
   <meta name="description" content="Request a free quote for TruShine Exterior Care in San Antonio, TX." />
+  <link rel="canonical" href="https://trushineexteriors.com/quote.html" />
 
-  <!-- iMessage / social preview -->
+  <!-- Social preview -->
   <meta property="og:site_name" content="TruShine Exterior Care" />
   <meta property="og:title" content="Request a Free Quote | TruShine" />
   <meta property="og:description" content="Crystal clear windows and professional exterior care in San Antonio, TX." />
@@ -16,17 +18,18 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://trushineexteriors.com/og-image.png" />
 
-<!-- Favicon -->
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
-<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-<!-- Android / PWA -->
-<link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#0e1a2b">
+  <!-- Android / PWA -->
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#0e1a2b">
+
   <link rel="stylesheet" crossorigin href="/assets/index-URt45oYU.css" />
 
   <style>
@@ -47,11 +50,22 @@
       overflow:hidden;
       border: 1px solid rgba(15, 23, 42, .06);
     }
+
+    /* HERO (TOP) */
     .quote-hero{
-      padding: 34px 28px;
+      padding: 38px 32px;
       background: radial-gradient(1200px 400px at 20% 0%, rgba(59,130,246,.25), transparent 60%),
                   linear-gradient(180deg, #0b1a33, #0a1630);
       color:#fff;
+      text-align:center;
+    }
+    .quote-logo{
+      width:92px;
+      height:auto;
+      object-fit:contain;
+      margin: 0 auto 14px;
+      display:block;
+      filter: drop-shadow(0 10px 25px rgba(0,0,0,.25));
     }
     .quote-hero h1{
       margin:0 0 8px;
@@ -61,22 +75,37 @@
     .quote-hero p{
       margin:0;
       opacity:.9;
-      max-width: 58ch;
+      max-width: 60ch;
+      margin-left:auto;
+      margin-right:auto;
     }
-    .quote-hero-top{
-  display:flex;
-  align-items:center;
-  gap:18px;
-}
 
-.quote-logo{
-  width:120px;
-  height:auto;
-  object-fit:contain;
-}
+    .trust-badge{
+      margin-top:12px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:14px;
+      font-weight:600;
+      color:#dbeafe;
+      background:rgba(255,255,255,.08);
+      padding:6px 12px;
+      border-radius:999px;
+      backdrop-filter:blur(4px);
+    }
+    .trust-badge::before{
+      content:"";
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:#38bdf8;
+      box-shadow:0 0 0 3px rgba(56,189,248,.15);
+    }
+
     .quote-body{
       padding: 26px 28px 30px;
     }
+
     .grid{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -84,8 +113,10 @@
     }
     @media (max-width: 720px){
       .grid{ grid-template-columns: 1fr; }
-      .quote-hero, .quote-body{ padding-left:18px; padding-right:18px; }
+      .quote-hero{ padding: 34px 18px; }
+      .quote-body{ padding: 22px 18px 26px; }
     }
+
     label{
       display:block;
       font-size: 13px;
@@ -107,6 +138,7 @@
       box-shadow: 0 0 0 4px rgba(59,130,246,.15);
     }
     textarea{ min-height: 140px; resize: vertical; }
+
     .actions{
       margin-top: 14px;
       display:flex;
@@ -130,12 +162,38 @@
       align-items:center;
       justify-content:center;
       gap:10px;
+      box-shadow: 0 10px 22px rgba(27, 99, 192, .20);
     }
     .btn-primary[disabled]{ opacity:.70; cursor:not-allowed; }
+
+    .trust-points{
+      margin-top:2px;
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      font-size:13px;
+      font-weight:600;
+      color:#0b1a33;
+    }
+    .trust-points span{
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+    .trust-points span::before{
+      content:"";
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:#2b7de9;
+      box-shadow:0 0 0 2px rgba(43,125,233,.18);
+    }
+
     .small-note{
       font-size: 13px;
       color: rgba(15, 23, 42, .70);
     }
+
     .success, .error{
       margin-top: 12px;
       padding: 12px 12px;
@@ -145,8 +203,33 @@
       transform: translateY(6px) scale(.98);
       opacity: 0;
     }
-    .success{ background: rgba(16,185,129,.12); color: #065f46; }
-    .error{ background: rgba(239,68,68,.10); color: #7f1d1d; }
+    .success{
+      background: rgba(16,185,129,.12);
+      color: #065f46;
+    }
+    .error{
+      background: rgba(239,68,68,.10);
+      color: #7f1d1d;
+    }
+
+    /* Brand-style status dots (no emojis) */
+    .success::before, .error::before{
+      content:"";
+      display:inline-block;
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      margin-right:8px;
+      vertical-align:middle;
+    }
+    .success::before{
+      background:#10b981;
+      box-shadow:0 0 0 3px rgba(16,185,129,.18);
+    }
+    .error::before{
+      background:#ef4444;
+      box-shadow:0 0 0 3px rgba(239,68,68,.14);
+    }
 
     /* animation */
     .pop-in{
@@ -157,72 +240,19 @@
       from { opacity:0; transform: translateY(8px) scale(.98); }
       to   { opacity:1; transform: translateY(0)   scale(1); }
     }
-    .trust-points{
-  margin-top:10px;
-  display:flex;
-  gap:14px;
-  flex-wrap:wrap;
-  font-size:13px;
-  font-weight:600;
-  color:#0b1a33;
-}
-
-.trust-points span{
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-
-.trust-points span::before{
-  content:"";
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background:#2b7de9;
-  box-shadow:0 0 0 2px rgba(43,125,233,.18);
-}
-    .trust-badge{
-  margin-top:12px;
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  font-size:14px;
-  font-weight:600;
-  color:#dbeafe;
-  background:rgba(255,255,255,.08);
-  padding:6px 12px;
-  border-radius:999px;
-  backdrop-filter:blur(4px);
-}
-
-.trust-badge::before{
-  content:"";
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background:#38bdf8;
-  box-shadow:0 0 0 3px rgba(56,189,248,.15);
-}
   </style>
 </head>
 
 <body>
   <div class="quote-wrap">
     <div class="quote-card">
-     <div class="quote-hero">
-  <div class="quote-hero-top">
-    <img src="/assets/trushine-logo.png" alt="TruShine Logo" class="quote-logo">
-    <div>
-      <h1>Request a Free Quote</h1>
-      <p>Tell us a little about your home and what you need cleaned. We’ll respond promptly.</p>
 
-  <div class="trust-badge">
-    Trusted by San Antonio homeowners
-  </div>
-</div>
-    </div>
-  </div>
-</div>
+      <div class="quote-hero">
+        <img src="/assets/trushine-logo.png" alt="TruShine Logo" class="quote-logo">
+        <h1>Request a Free Quote</h1>
+        <p>Tell us a little about your home and what you need cleaned. We’ll respond promptly.</p>
+        <div class="trust-badge">Trusted by San Antonio homeowners</div>
+      </div>
 
       <div class="quote-body">
         <!-- IMPORTANT: no _redirect here. This stays on-page. -->
@@ -271,20 +301,24 @@
 
           <div class="actions">
             <button class="btn-primary" id="submitBtn" type="submit">Submit Quote Request</button>
+
             <div class="trust-points">
-  <span>Free Estimates</span>
-  <span>Fast Response</span>
-  <span>Professional & Insured</span>
-</div>
+              <span>Free Estimates</span>
+              <span>Fast Response</span>
+              <span>Professional &amp; Insured</span>
+            </div>
+
             <div class="small-note">
-              Or email us directly at <a href="mailto:info@trushineexteriors.com">info@trushineexteriors.com</a>
+              Or email us directly at
+              <a href="mailto:info@trushineexteriors.com">info@trushineexteriors.com</a>
             </div>
           </div>
 
-          <div class="success" id="successBox">✅ Sent! We’ll get back to you shortly.</div>
-          <div class="error" id="errorBox">❌ Something went wrong. Please try again or email us directly.</div>
+          <div class="success" id="successBox">Sent! We’ll get back to you shortly.</div>
+          <div class="error" id="errorBox">Something went wrong. Please try again or email us directly.</div>
         </form>
       </div>
+
     </div>
   </div>
 
@@ -324,12 +358,11 @@
 
             if (successBox) {
               successBox.style.display = "block";
-              // trigger animation
               requestAnimationFrame(() => successBox.classList.add("pop-in"));
             }
 
             if (btn) {
-              btn.textContent = "Sent ✅";
+              btn.textContent = "Sent";
               setTimeout(() => {
                 btn.disabled = false;
                 btn.textContent = originalText;
