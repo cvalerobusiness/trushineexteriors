@@ -8,6 +8,13 @@
   <meta name="description" content="Request a free quote for TruShine Exterior Care in San Antonio, TX." />
   <link rel="canonical" href="https://trushineexteriors.com/quote.html" />
 
+  <!-- SEO / Local signals -->
+  <meta name="robots" content="index, follow">
+  <meta name="geo.region" content="US-TX">
+  <meta name="geo.placename" content="San Antonio">
+  <meta name="geo.position" content="29.4241;-98.4936">
+  <meta name="ICBM" content="29.4241, -98.4936">
+
   <!-- Social preview -->
   <meta property="og:site_name" content="TruShine Exterior Care" />
   <meta property="og:title" content="Request a Free Quote | TruShine" />
@@ -29,6 +36,31 @@
   <!-- Android / PWA -->
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#0e1a2b">
+
+  <!-- LocalBusiness schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "TruShine Exterior Care",
+    "image": "https://trushineexteriors.com/og-image.png",
+    "url": "https://trushineexteriors.com",
+    "telephone": "+1-210-XXX-XXXX",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "San Antonio",
+      "addressRegion": "TX",
+      "addressCountry": "US"
+    },
+    "areaServed": "San Antonio",
+    "serviceType": [
+      "Window Cleaning",
+      "Exterior Window Cleaning",
+      "Screen Cleaning",
+      "Window Track Cleaning"
+    ]
+  }
+  </script>
 
   <link rel="stylesheet" crossorigin href="/assets/index-URt45oYU.css" />
 
@@ -240,20 +272,19 @@
       from { opacity:0; transform: translateY(8px) scale(.98); }
       to   { opacity:1; transform: translateY(0)   scale(1); }
     }
+
     /* FORCE hero on top, form underneath (override anything external) */
-.quote-card{
-  display:flex !important;
-  flex-direction:column !important;
-}
-
-.quote-hero,
-.quote-body{
-  width:100% !important;
-}
-
-.quote-wrap{
-  align-items:flex-start !important;
-}
+    .quote-card{
+      display:flex !important;
+      flex-direction:column !important;
+    }
+    .quote-hero,
+    .quote-body{
+      width:100% !important;
+    }
+    .quote-wrap{
+      align-items:flex-start !important;
+    }
   </style>
 </head>
 
@@ -269,6 +300,23 @@
       </div>
 
       <div class="quote-body">
+
+        <!-- Call CTA (replace number) -->
+        <div style="margin-bottom:20px; text-align:center;">
+          <a href="tel:+18175504909"
+             style="
+             display:inline-block;
+             padding:12px 20px;
+             background:#0e1a2b;
+             color:white;
+             border-radius:10px;
+             font-weight:600;
+             text-decoration:none;
+             ">
+             Call Now for a Free Quote
+          </a>
+        </div>
+
         <!-- IMPORTANT: no _redirect here. This stays on-page. -->
         <form id="quoteForm" action="https://formspree.io/f/xbdabkyg" method="POST" novalidate>
           <input type="hidden" name="_subject" value="New TruShine Quote Request" />
